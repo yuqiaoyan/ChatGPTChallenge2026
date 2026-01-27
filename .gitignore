@@ -1,6 +1,14 @@
 # Environment variables
 .env
 
+# Internal development documents
+Project Memory/
+tutorial.md
+PROJECT_PLAN.md
+Gemini.md
+SubstackSampleTutorial.md
+.claude/
+
 # Dependencies
 node_modules/
 client/node_modules/
