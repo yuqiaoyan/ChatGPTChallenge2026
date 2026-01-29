@@ -28,6 +28,16 @@ Make sure all commands work within Windows terminal; this is being developed loc
 **Git Repository:**
 This repository will be shared publicly as a learning resource and code challenge. Do not git push unless explicitly asked. You may git commit on my behalf. Ensure no credentials are ever committed.
 
+**CRITICAL - .gitignore Compliance:**
+ALWAYS check .gitignore before staging files with git add. NEVER commit files that are listed in .gitignore. The following are explicitly excluded and must NEVER be committed:
+- `Project Memory/` - Internal development documentation
+- `tutorial.md` - Tutorial article (private, not part of public codebase)
+- `Designs/` - Design mockups and planning sketches
+- `.env` - Environment variables and API keys
+- `.claude/` - Claude Code settings
+
+Only commit source code files (client/src/, server/, README.md, package.json, etc.) that are part of the public codebase.
+
 **Target Audience:**
 Code is written for Product Managers who may have varying technical backgrounds. Keep implementations clear and avoid over-engineering. Comments should explain "why" not "what."
 

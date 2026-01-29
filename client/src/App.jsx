@@ -1,34 +1,52 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useEffect, useRef } from 'react'
+import Sidebar from './components/Sidebar'
+import ChatArea from './components/ChatArea'
+import useChat from './hooks/useChat'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const {
+    chatIds,
+    chats,
+    activeChat,
+    activeChatId,
+    isLoading,
+    createChat,
+    switchChat,
+    sendMessage
+  } = useChat()
+
+  const initializedRef = useRef(false)
+
+  useEffect(() => {
+    if (!initializedRef.current && chatIds.length === 0) {
+      initializedRef.current = true
+      createChat()
+    }
+  }, [chatIds, createChat])
+
+  const handleNewChat = () => {
+    createChat()
+  }
+
+  const handleChatSelect = (chatId) => {
+    switchChat(chatId)
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className="app">
+      <Sidebar
+        chats={chats}
+        activeChatId={activeChatId}
+        onNewChat={handleNewChat}
+        onChatSelect={handleChatSelect}
+      />
+      <ChatArea
+        activeChat={activeChat}
+        isLoading={isLoading}
+        onSendMessage={sendMessage}
+      />
+    </div>
   )
 }
 
