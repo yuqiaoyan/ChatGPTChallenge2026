@@ -1,13 +1,14 @@
 .chat-list {
   display: flex;
   flex-direction: column;
+  gap: 4px;
 }
 
 .chat-item {
   padding: var(--spacing-sm) var(--spacing-md);
   cursor: pointer;
   transition: background-color var(--transition-fast);
-  border-left: 2px solid transparent;
+  border-radius: 8px;
 }
 
 .chat-item:hover {
@@ -16,7 +17,6 @@
 
 .chat-item.active {
   background-color: var(--hover-bg);
-  border-left-color: var(--primary);
 }
 
 .chat-title {

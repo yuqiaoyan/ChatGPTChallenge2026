@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import Sidebar from './components/Sidebar'
 import ChatArea from './components/ChatArea'
+import ErrorToast from './components/ErrorToast'
 import useChat from './hooks/useChat'
 import './App.css'
 
@@ -11,9 +12,12 @@ function App() {
     activeChat,
     activeChatId,
     isLoading,
+    error,
+    setError,
     createChat,
     switchChat,
-    sendMessage
+    sendMessage,
+    retryLastMessage
   } = useChat()
 
   const initializedRef = useRef(false)
@@ -35,6 +39,11 @@ function App() {
 
   return (
     <div className="app">
+      <ErrorToast
+        error={error}
+        onClose={() => setError(null)}
+        onRetry={retryLastMessage}
+      />
       <Sidebar
         chats={chats}
         activeChatId={activeChatId}

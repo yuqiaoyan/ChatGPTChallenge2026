@@ -15,6 +15,8 @@ function useChat() {
   const [activeChat, setActiveChat] = useState(null)
   const [chats, setChats] = useState([])
   const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState(null)
+  const [lastFailedMessage, setLastFailedMessage] = useState(null)
 
   useEffect(() => {
     if (activeChatId) {
@@ -150,6 +152,7 @@ function useChat() {
     if (!activeChat || !content.trim()) return
 
     setIsLoading(true)
+    setError(null)
 
     const userMessage = {
       id: generateId(),
@@ -200,6 +203,8 @@ function useChat() {
       content: msg.content
     }))
 
+    setLastFailedMessage({ content, chatState: updatedChatWithAssistant })
+
     await sendMessageToAPI(
       apiMessages,
       (chunk) => {
@@ -218,9 +223,64 @@ function useChat() {
       },
       (finalContent) => {
         setIsLoading(false)
+        setLastFailedMessage(null)
       },
-      (error) => {
-        console.error('Error sending message:', error)
+      (apiError) => {
+        setError(apiError)
+        setIsLoading(false)
+
+        const messagesWithoutEmpty = updatedChatWithUser.messages
+        const chatWithoutFailedResponse = {
+          ...updatedChatWithUser,
+          messages: messagesWithoutEmpty,
+          updatedAt: Date.now()
+        }
+        setActiveChat(chatWithoutFailedResponse)
+        saveChat(chatWithoutFailedResponse)
+      }
+    )
+  }
+
+  const retryLastMessage = async () => {
+    if (!lastFailedMessage) return
+
+    setError(null)
+    setIsLoading(true)
+
+    const { chatState } = lastFailedMessage
+
+    setActiveChat(chatState)
+    saveChat(chatState)
+
+    const apiMessages = chatState.messages
+      .filter(msg => msg.role !== 'assistant' || msg.content)
+      .map(msg => ({
+        role: msg.role,
+        content: msg.content
+      }))
+
+    await sendMessageToAPI(
+      apiMessages,
+      (chunk) => {
+        const messages = [...chatState.messages]
+        messages[messages.length - 1] = {
+          ...messages[messages.length - 1],
+          content: chunk
+        }
+        const updatedChat = {
+          ...chatState,
+          messages,
+          updatedAt: Date.now()
+        }
+        setActiveChat(updatedChat)
+        saveChat(updatedChat)
+      },
+      (finalContent) => {
+        setIsLoading(false)
+        setLastFailedMessage(null)
+      },
+      (apiError) => {
+        setError(apiError)
         setIsLoading(false)
       }
     )
@@ -232,14 +292,17 @@ function useChat() {
     activeChat,
     activeChatId,
     isLoading,
+    error,
     setIsLoading,
+    setError,
     createChat,
     switchChat,
     loadChat,
     addMessage,
     updateLastMessage,
     updateChatTitle,
-    sendMessage
+    sendMessage,
+    retryLastMessage
   }
 }
 

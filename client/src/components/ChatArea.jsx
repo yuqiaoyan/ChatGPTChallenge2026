@@ -7,7 +7,7 @@ function ChatArea({ activeChat, isLoading, onSendMessage }) {
   return (
     <main className="chat-area">
       <Header />
-      <MessageList messages={activeChat?.messages || []} />
+      <MessageList messages={activeChat?.messages || []} isLoading={isLoading} />
       <MessageInput isLoading={isLoading} onSendMessage={onSendMessage} />
     </main>
   )

@@ -31,3 +31,29 @@
 .empty-state p {
   font-size: var(--font-size-base);
 }
+
+.loading-message {
+  display: flex;
+  gap: var(--spacing-md);
+  padding: var(--spacing-lg) var(--spacing-xl);
+  max-width: 48rem;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.loading-dot {
+  width: 10px;
+  height: 10px;
+  background-color: var(--foreground);
+  border-radius: 50%;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}

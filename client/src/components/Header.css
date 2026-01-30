@@ -19,7 +19,7 @@
   gap: var(--spacing-sm);
   padding: var(--spacing-sm) var(--spacing-md);
   background: none;
-  border: 1px solid var(--border);
+  border: none;
   border-radius: var(--radius-md);
   color: var(--foreground);
   font-size: var(--font-size-sm);
@@ -30,7 +30,6 @@
 
 .version-dropdown:hover {
   background-color: var(--hover-bg);
-  border-color: var(--border-hover);
 }
 
 .header-right {
@@ -54,6 +53,25 @@
 }
 
 .icon-btn:hover {
+  background-color: var(--hover-bg);
+  color: var(--foreground);
+}
+
+.icon-btn-with-text {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background: none;
+  border: none;
+  border-radius: var(--radius-md);
+  color: var(--foreground-muted);
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.icon-btn-with-text:hover {
   background-color: var(--hover-bg);
   color: var(--foreground);
 }
