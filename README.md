@@ -1,19 +1,19 @@
 # ChatGPT Challenge
 
-A minimal ChatGPT web app clone built with React and Express that demonstrates core chat functionality including message editing, deletion, and real-time streaming responses.
+A minimal ChatGPT web app clone built with React and Express that demonstrates core chat functionality with real-time streaming responses.
 
-This project serves as the foundation for tutorial articles on advanced features and as a code challenge for Product Managers to fork and extend with their own creative features.
+This project serves as a foundation for learning chat application architecture and as a code challenge for Product Managers to fork and extend with their own creative features.
 
 ## Technology Stack
 
 **Frontend:**
-- React 18 with Vite
+- React 19.2 with Vite
 - CSS3 for styling
 - Fetch API for server communication
 
 **Backend:**
 - Node.js & Express
-- OpenAI API (GPT-4)
+- OpenAI API (GPT-3.5-turbo)
 - Server-Sent Events (SSE) for streaming
 
 ## Prerequisites
@@ -27,7 +27,7 @@ This project serves as the foundation for tutorial articles on advanced features
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/[username]/ChatGPTChallenge.git
+git clone https://github.com/yuqiaoyan/ChatGPTChallenge.git
 cd ChatGPTChallenge
 ```
 
@@ -88,8 +88,11 @@ Navigate to http://localhost:5173 and start chatting!
 ChatGPTChallenge/
 ├── client/                 # React frontend
 │   ├── src/
+│   │   ├── components/    # UI components
+│   │   ├── hooks/         # Custom React hooks
+│   │   ├── services/      # API services
+│   │   ├── utils/         # Helper functions
 │   │   ├── App.jsx        # Main app component
-│   │   ├── App.css        # Styles
 │   │   └── main.jsx       # Entry point
 │   ├── package.json
 │   └── vite.config.js
@@ -99,43 +102,29 @@ ChatGPTChallenge/
 │   ├── .env.example       # Environment template
 │   └── package.json
 │
-├── Project Memory/         # Technical documentation
-│   ├── product-spec.md    # Product requirements
-│   ├── technical-spec.md  # Technical design decisions
-│   └── progress.md        # Development progress
-│
-├── Designs/               # UI mockups and design assets
 ├── CLAUDE.md              # Development guidelines
+├── LICENSE
 ├── .gitignore
 └── README.md
 ```
 
 ## Current Features
 
-- Real-time chat with OpenAI GPT-4
+- Real-time chat with OpenAI GPT-3.5-turbo
 - Streaming responses (word-by-word)
-- Message history
-- Edit previous messages
-- Delete messages
-- Regenerate responses
-- Clean, minimal UI
+- Multiple chat conversations
+- Persistent message history (localStorage)
+- Auto-generated chat titles
+- Clean, minimal UI matching ChatGPT design
+- Comprehensive error handling
+
+## Code Challenge for Product Managers
+
+This project is designed as a code challenge! Fork this repo and build your own features.
 
 ## Development
 
-This is a development repository. Advanced features (folder attachments, automations, multi-threaded conversations) will be added in future phases.
-
-For detailed technical documentation and development guidelines, see the `Project Memory/` folder and `CLAUDE.md`.
-
-## Documentation
-
-- **Product Spec**: `Project Memory/product-spec.md` - Core requirements and goals
-- **Technical Spec**: `Project Memory/technical-spec.md` - Key technical design decisions
-- **Progress**: `Project Memory/progress.md` - Current status and known issues
-- **Tutorial**: `tutorial.md` - Substack article for Product Managers
-
-## Contributing
-
-This project is designed as a learning resource and code challenge. Feel free to fork and extend it with your own features!
+For detailed development guidelines, see `CLAUDE.md`.
 
 ## License
 
