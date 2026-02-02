@@ -123,7 +123,7 @@ function MessageInput({ onSendMessage, isLoading }) {
             {value.length} / {MAX_MESSAGE_LENGTH}
           </span>
         )}
-        <p className="input-disclaimer">ChatGPT can make mistakes. Check important info.</p>
+        <p className="input-disclaimer">This is a prototype based on ChatGPT. It is not affiliated with or sponsored by OpenAI</p>
       </div>
     </div>
   )

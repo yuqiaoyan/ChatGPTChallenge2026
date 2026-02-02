@@ -4,6 +4,8 @@ A minimal ChatGPT web app clone built with React and Express that demonstrates c
 
 This project serves as a foundation for learning chat application architecture and as a code challenge for Product Managers to fork and extend with their own creative features.
 
+**Disclaimer:** This project is not affiliated with or sponsored by OpenAI.
+
 ## Technology Stack
 
 **Frontend:**
